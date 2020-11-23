@@ -1,6 +1,7 @@
-This is from the range [0 .. 2^28]
+This is from the range [5 .. 2^28], finding the smallest integer ∆^2 such that n-∆^2 is a semiprime
+ 2^28=268,435,456
 ------------------------------------------------------------------
-There are 9 numbers that are not any squared distance away from a semiprime:
+There are 9 numbers that are not a squared distance away from any semiprime:
  |____[12, 17, 28, 32, 72, 108, 117, 297, 657]
 There are 45150716 numbers that are 0^2 (0) distance away:
 \ These are the first 15:
