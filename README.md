@@ -2,6 +2,12 @@
 High level summary:
 Generate sieve for as many numbers as you want to test, store the results as a binary string, or encode the information into 64 bits for future refrence.
 
+for each integer, n,test if n -∆^2 is a semiprime for increasing ∆ until n-∆^2 <=0
+
+store and print results
+
+
+SETUP
 set up configs in runTesting to determine how many threads and integers to test
 
 double check file sources in runTesting and testing.py
