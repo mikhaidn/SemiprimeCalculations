@@ -1,4 +1,7 @@
 import time
+from math import log
+import sys
+import ast
 def createSemiPrimeSieve(n): 
   
     # Storing indices in each element of vector 
@@ -8,20 +11,20 @@ def createSemiPrimeSieve(n):
    
     print("-----------------------")
     squareSemis = []
-    weirdcounter = 1
+    tim = time.perf_counter_ns()
     for i in range(2, n + 1, 1): 
         othercounter = 0
-        if (i % 10**weirdcounter == 0):
-             print ("%d out of %d" % (i,n))
-             weirdcounter+=1
         if (v[i] == i and countDivision[i] == 2):
+            tom = time.perf_counter_ns()
+            dur = tom-tim
+            if (dur > 10**9): # x seconds
+                print("i at %d, counter at %d, approx. %0.3f%% done"%(i,othercounter,log(i)/log(n+1)))
+                tim = tom
             sq = i*i
             if sq < n+1:
                 squareSemis.append(sq)
             for j in range(2 * i, n + 1, i): 
                 othercounter+=1
-                if (othercounter % int(10000000/i) == 0):
-                    print("i at %d, counter at %d"%(i,othercounter))
                 if (countDivision[j] > 0): 
                     v[j] = int(v[j] / i) 
                     countDivision[j] -= 1
@@ -40,7 +43,8 @@ def createSemiPrimeSieve(n):
 
 
 def storeIntsAsBits(nums):
-    with open('semiprimes/'+str(nums[-1])+'.txt','w') as out:
+    filename ='semiprimes/'+str(nums[-1])+'.txt'
+    with open(filename,'w') as out:
         index=0
         for k in range(nums[-1]+1):
             if k % 10000000 == 0: print ("STORING %d out of %d" % (k,nums[-1]+1))
@@ -50,6 +54,7 @@ def storeIntsAsBits(nums):
                 index+=1
             else:
                 out.write('0')
+    return filename
 
 def encode(bin_string):
     charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_'
@@ -97,24 +102,26 @@ def convertToHex(fileIn,fileOut):
 
 # Driver code 
 if __name__ == '__main__': 
-    # n = 2**28
-    # tic = time.perf_counter()
-    # semiPrime = createSemiPrimeSieve(n)
-    # tac = time.perf_counter()
-    # p1Time = tac - tic
-    # print("created %d sieve in %0.4f seconds" %(n,p1Time))
+    n = 2**29
 
-    # storeIntsAsBits(semiPrime) 
-    # toc = time.perf_counter()
-    # print("part2:",toc-tac)
-    # print("Took a total of %0.4f seconds"%(toc-tic))
+    if len(sys.argv)>1:
+        n = ast.literal_eval(sys.argv[1])
+    tic = time.perf_counter()
+    semiPrime = createSemiPrimeSieve(n)
+    tac = time.perf_counter()
+    p1Time = tac - tic
+    print("created %d sieve in %0.4f seconds" %(n,p1Time))
+
+    filename = storeIntsAsBits(semiPrime) 
+    toc = time.perf_counter()
+    print("part2:",toc-tac)
+    print("Took a total of %0.4f seconds"%(toc-tic))
 
 
     # # Print all semi-primes 
     # for i in range(len(semiPrime)): 
     #     print(semiPrime[i], end = " ") 
-    filename = "semiprimes/134217721"
-    with open(filename+".txt","r") as fin:
+    with open(filename,"r") as fin:
         encoded =  encode(fin.read())
         with open(filename+"-encoded.txt","w") as fout:
             fout.write(encoded)
