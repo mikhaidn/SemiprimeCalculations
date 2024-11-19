@@ -5,7 +5,7 @@ import time
 
 
 def main():
-    MAX_NUM = 2**29
+    MAX_NUM = 2**30
     threads = 8
     n = int(MAX_NUM/threads)
     max_int_in_file = 1000

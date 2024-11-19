@@ -102,7 +102,7 @@ def convertToHex(fileIn,fileOut):
 
 # Driver code 
 if __name__ == '__main__': 
-    n = 2**29
+    n = 2**32
 
     if len(sys.argv)>1:
         n = ast.literal_eval(sys.argv[1])

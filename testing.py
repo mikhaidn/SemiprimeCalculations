@@ -11,7 +11,7 @@ def traverse(n, m):
     if n <5:
         n=5
     is_semiprime_str = None
-    with open("semiprimes/536870903-encoded.txt") as semis:
+    with open("semiprimes/1073741821.txt-encoded.txt") as semis:
         temp = semis.read()
         if temp[0] == 'c':
             print("decoding ...")
